@@ -2,7 +2,7 @@
 const result = $("#result");
 const submit = $("#submit");
 
-people = [];
+let people = [];
 
 const fetchAPI = () => {
   for (let i = 1; i < 11; i++) {
