@@ -1,6 +1,5 @@
 //DOM variable
 const result = $("#result");
-const submit = $("#submit");
 
 let people = [];
 
@@ -15,9 +14,6 @@ const fetchAPI = () => {
       });
   }
 };
-
-const a = people;
-console.log(a);
 
 const template = (detail, index) => {
   let no = index + 1;
@@ -39,8 +35,5 @@ const getPeople = () => {
 
 window.addEventListener("load", function() {
   fetchAPI();
-});
-
-submit.on("click", function() {
-  getPeople();
+  this.setTimeout(getPeople, 3000);
 });
