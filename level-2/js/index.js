@@ -29,6 +29,7 @@ const template = (detail, index) => {
 };
 
 const getPeople = () => {
+  result.html("");
   people.map((detail, index) => {
     const details = template(detail, index);
 
