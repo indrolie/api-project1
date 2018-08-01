@@ -1,39 +1,30 @@
 //DOM variable
 const result = $("#result");
 
-let people = [];
-
 const fetchAPI = () => {
   for (let i = 1; i < 11; i++) {
     fetch(`https://swapi.co/api/people/${i}/`)
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        people.push(data);
-      });
+      .then(response => response.json())
+      .then(showPeople);
   }
 };
 
-const template = (detail, index) => {
-  let no = index + 1;
-  return `<div>No.${no}</div>
-          <div>Name: ${detail.name}</div>
-          <div>Height: ${detail.height}</div>
-          <div>Hair Color: ${detail.hair_color}</div>
-          <hr>`;
+const template = person => {
+  return `<div>
+          <div>No.</div>
+          <div>Name: ${person.name}</div>
+          <div>Height: ${person.height}</div>
+          <div>Hair Color: ${person.hair_color}</div>
+          <hr>
+          </div>`;
 };
 
-const getPeople = () => {
-  result.html("");
-  people.map((detail, index) => {
-    const details = template(detail, index);
+const showPeople = data => {
+  const peopleDOM = template(data);
 
-    result.append(details);
-  });
+  result.append(peopleDOM);
 };
 
 window.addEventListener("load", function() {
   fetchAPI();
-  this.setTimeout(getPeople, 3000);
 });
