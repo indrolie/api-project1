@@ -3,15 +3,11 @@ result = $("#result");
 
 const fetchAPI = () => {
   fetch("https://api.github.com/users/indrolie/followers")
-    .then(response => {
-      return response.json();
-    })
-    .then(data => {
-      followers = data;
-    });
+    .then(response => response.json())
+    .then(showFollowers);
 };
 
-const showTemplate = (person, index) => {
+const showTemplate = person => {
   return `
   <div class="card" style="width: 18rem;">
     <img class="card-img-top" src="${person.avatar_url}" alt="Card image cap">
@@ -23,10 +19,9 @@ const showTemplate = (person, index) => {
 `;
 };
 
-const showFollowers = () => {
-  result.html("");
-  followers.map((person, index) => {
-    const card = showTemplate(person, index);
+const showFollowers = data => {
+  data.forEach(person => {
+    const card = showTemplate(person);
 
     result.append(card);
   });
@@ -34,5 +29,4 @@ const showFollowers = () => {
 
 window.addEventListener("load", function() {
   fetchAPI();
-  setTimeout(showFollowers, 3000);
 });
